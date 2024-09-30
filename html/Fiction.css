@@ -1,0 +1,18 @@
+.navbar{
+    border: 2px solid black;
+    background-color: #F4F0EC;
+    height: 100px;
+    .btn {
+        background-color: #EAE0C8;
+        border: black;
+        color: black;
+    }
+    .navbar-brand{
+        font-size: 40px;
+        font-family: cursive;
+    }
+}
+.carousel-item{
+    height: 700px;
+    object-fit:cover;
+}

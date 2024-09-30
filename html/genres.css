@@ -1,0 +1,144 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+  background-color: black;
+}
+.navbar{
+    height: 200px;
+    width: 100%;
+    border: 2px solid black;
+    background-color: #644937;
+    background-image: url(genrenav.jpg);
+    background-size: cover;
+    /* position: sticky; */
+    top: 0;
+    display: flex;
+   #genrehead{
+    text-decoration: none;
+   }
+    h1{
+        font-size: 75px;
+        color: #E0FFFF;
+    }
+}
+.options{
+    height: 48px;
+    width: 100%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    
+    /* justify-content: space-between; */
+    padding-left: 0px;
+    padding-right: 0px;
+    a{
+        text-decoration: none;
+    }
+
+#Fiction{
+    display: inline-block;
+    color: black;
+    background-color: whitesmoke;
+    width: 400px;
+    text-align: center;
+    
+}
+#Romance{
+    display: inline-block;
+    background-color: red;
+    color: #800000;
+    width: 400px;
+    text-align: center;
+}
+#Mystery{
+    display: inline-block;
+    background-color: beige;
+    width: 400px;
+    color: burlywood;
+    text-align: center;
+}
+#Horror{
+    display: inline-block;
+    background-color: grey;
+    width: 408px;
+    color: #555555;
+    text-align: center;
+}
+
+}
+/* Style the dropdown button */
+.dropbtn {
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    /* transition: transform 0.3s; */
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: grey;
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Rotate the arrow when the dropdown is open */
+  .dropdown:hover .dropbtn {
+    /* transform: rotate(180deg); */
+    background-color: whitesmoke;
+  }
+  .photos{
+    width: 100%;
+    height: 492px;
+    /* border: 2px solid black; */
+    /* background-color: aqua; */
+    display: flex;
+    width: fit-content;
+   /* flex-direction: row; */
+    img{
+        display: inline-block;
+        width: 378px;
+        height: 494px;
+        /* display: flex; */
+        /* justify-content: space-evenly; */
+        /* justify-self: center; */
+    }
+    #horrorhead{
+    
+    }
+    a{
+        text-decoration: none;
+    }
+  }
