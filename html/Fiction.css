@@ -1,18 +1,109 @@
-.navbar{
-    border: 2px solid black;
-    background-color: #F4F0EC;
+.navbar {
+    /* padding-left: 2px; */
     height: 100px;
-    .btn {
-        background-color: #EAE0C8;
-        border: black;
-        color: black;
-    }
-    .navbar-brand{
-        font-size: 40px;
-        font-family: cursive;
-    }
-}
-.carousel-item{
-    height: 700px;
-    object-fit:cover;
-}
+    background-color: #eae0d5;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* padding: 10px 20px 30px 30px; */
+    border: 2px solid black;
+  }
+  .main{
+    background-color: white;
+    background-image: url(fictionheader.jpg);
+    background-size:cover ;
+  }
+  .navbar .logo {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #0a0908;
+    text-decoration: none;
+  }
+  .navbar .search-bar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar .search-bar input[type=text] {
+    padding: 6px;
+    border: none;
+    font-size: 16px;
+  }
+  
+  .navbar .search-bar button {
+    background-color: #22333b;
+    color: #c6ac8f;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  
+  
+  .card-adjustment1{
+    padding-top: 20px;
+    /* margin-right: 20px; */
+    height: 500px;
+    /* width: 1500px; */
+    margin-right: 10px;
+    margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: first baseline;
+  }
+  .card-adjustment2{
+    padding-top: 20px;
+    /* margin-right: 20px; */
+    height: 500px;
+    /* width: 1500px; */
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+  }
+  
+  
+  .card {
+    /* position: absolute; */
+    width: 400px;
+    height: 200px;
+    overflow: hidden;
+    cursor:grabbing;
+    margin-right: 10px;
+  }
+  
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  
+  }
+  
+  .card .hover-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .card:hover img {
+    transform: scale(1.1);
+  }
+  
+  .card:hover .hover-text {
+    opacity: 1;
+  }
