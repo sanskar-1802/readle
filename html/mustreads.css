@@ -7,10 +7,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px 30px 30px;
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }
 .main{
-  background-color: black;
+  background-color:beige;
 }
 .navbar .logo {
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

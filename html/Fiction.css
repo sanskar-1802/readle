@@ -40,11 +40,10 @@
     border: none;
     cursor: pointer;
   }
-  
-  
-  
+
   .card-adjustment1{
     padding-top: 20px;
+ 
     /* margin-right: 20px; */
     height: 500px;
     /* width: 1500px; */
@@ -69,6 +68,7 @@
     /* position: absolute; */
     width: 400px;
     height: 200px;
+
     overflow: hidden;
     cursor:grabbing;
     margin-right: 10px;

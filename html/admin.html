@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Review Admin - Authentication</title>
+    <style>
+        /* Common Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            color: #333;
+        }
+
+        /* Auth Styles */
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1.1rem;
+        }
+
+        .auth-tab.active {
+            color: #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        /* Dashboard Styles */
+        #dashboard {
+            display: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .panel {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .panel h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background: #34495e;
+        }
+
+        .message {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .books-list, .reviews-list {
+            margin-top: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+
+    
+
+        /* Rest of the dashboard styles remain the same as in the previous version */
+        /* ... (Include all the previous dashboard styles here) ... */
+    </style>
+</head>
+<body>
+    <!-- Authentication Section -->
+    <div id="auth" class="auth-container">
+        <div class="auth-header">
+            <h1>Book Review Admin</h1>
+            <p>Please login or sign up to continue</p>
+        </div>
+
+        <div class="auth-tabs">
+            <button class="auth-tab active" onclick="showAuthForm('login')">Login</button>
+            <button class="auth-tab" onclick="showAuthForm('signup')">Sign Up</button>
+        </div>
+
+        <form id="loginForm" class="auth-form active">
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+            <button type="submit">Login</button>
+            <div id="loginMessage" class="message"></div>
+        </form>
+
+        <form id="signupForm" class="auth-form">
+            <div class="form-group">
+                <label for="signupName">Full Name</label>
+                <input type="text" id="signupName" required>
+            </div>
+            <div class="form-group">
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="adminCode">Admin Code</label>
+                <input type="password" id="adminCode" required>
+            </div>
+            <button type="submit">Sign Up</button>
+            <div id="signupMessage" class="message"></div>
+        </form>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard">
+        <!-- Include the entire dashboard HTML from the previous version here -->
+        <!-- ... (Previous dashboard HTML) ... -->
+        <div class="container">
+            <header class="header">
+                <h1>Book Review Admin Dashboard</h1>
+                <div id="currentTime"></div>
+            </header>
+    
+            <section class="stats">
+                <div class="stat-card">
+                    <h3>Total Books</h3>
+                    <p id="totalBooks">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Reviews</h3>
+                    <p id="totalReviews">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Rating</h3>
+                    <p id="averageRating">0</p>
+                </div>
+            </section>
+    
+            <div class="main-content">
+                <section class="panel">
+                    <h2>Add New Book</h2>
+                    <form id="addBookForm">
+                        <div class="form-group">
+                            <label for="bookTitle">Book Title</label>
+                            <input type="text" id="bookTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookAuthor">Author</label>
+                            <input type="text" id="bookAuthor" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookGenre">Genre</label>
+                            <select id="bookGenre" required>
+                                <option value="">Select Genre</option>
+                                <option value="Fiction">Fiction</option>
+                                <option value="Non-Fiction">Non-Fiction</option>
+                                <option value="Mystery">Mystery</option>
+                                <option value="Science Fiction">Science Fiction</option>
+                                <option value="Romance">Romance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookDescription">Description</label>
+                            <textarea id="bookDescription" rows="3" required></textarea>
+                        </div>
+                        <button type="submit">Add Book</button>
+                    </form>
+                    <div id="bookMessage" class="message"></div>
+                </section>
+                <section class="panel">
+                    <h2>Books List</h2>
+                    <div class="books-list">
+                        <table id="booksTable">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Genre</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+                <section class="panel">
+                    <h2>Add Review</h2>
+                    <form id="addReviewForm">
+                        <div class="form-group">
+                            <label for="reviewBook">Book</label>
+                            <select id="reviewBook" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewerName">Reviewer Name</label>
+                            <input type="text" id="reviewerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating">Rating (1-5)</label>
+                            <input type="number" id="rating" min="1" max="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewText">Review</label>
+                            <textarea id="reviewText" rows="3" required></textarea>
+                        </div>
+                        <button type="submit">Add Review</button>
+                    </form>
+                    <div id="reviewMessage" class="message"></div>
+                </section>
+    
+                <section class="panel">
+                    <h2>Reviews List</h2>
+                    <div class="reviews-list">
+                        <table id="reviewsTable">
+                            <thead>
+                                <tr>
+                                    <th>Book</th>
+                                    <th>Reviewer</th>
+                                    <th>Rating</th>
+                                    <th>Review</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    
+                    
+    </div>
+
+    <script>
+        // Authentication Scripts
+        const ADMIN_SECRET = "admin123"; // In a real app, this would be server-side
+
+        // Initialize admin users in localStorage if not exists
+        if (!localStorage.getItem('adminUsers')) {
+            localStorage.setItem('adminUsers', JSON.stringify([]));
+        }
+
+        function showAuthForm(formType) {
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            forms.forEach(form => form.classList.remove('active'));
+            
+            if (formType === 'login') {
+                tabs[0].classList.add('active');
+                forms[0].classList.add('active');
+            } else {
+                tabs[1].classList.add('active');
+                forms[1].classList.add('active');
+            }
+        }
+
+        // Handle Sign Up
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const adminCode = document.getElementById('adminCode').value;
+
+            if (adminCode !== ADMIN_SECRET) {
+                showMessage('signupMessage', 'Invalid admin code!', 'error');
+                return;
+            }
+            
+            const adminUsers = JSON.parse(localStorage.getItem('adminUsers'));
+            
+            if (adminUsers.some(user => user.email === email)) {
+                showMessage('signupMessage', 'Email already registered!', 'error');
+                return;
+            }
+            
+            adminUsers.push({ name, email, password });
+            localStorage.setItem('adminUsers', JSON.stringify(adminUsers));
+            
+            showMessage('signupMessage', 'Registration successful! Please login.', 'success');
+            this.reset();
+            setTimeout(() => showAuthForm('login'), 1500);
+        });
+
+        // Handle Login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const adminUsers = JSON.parse(localStorage.getItem('adminUsers'));
+            const user = adminUsers.find(user => user.email === email && user.password === password);
+            
+            if (user) {
+                localStorage.setItem('currentAdmin', JSON.stringify(user));
+                showMessage('loginMessage', 'Login successful!', 'success');
+                setTimeout(() => {
+                    document.getElementById('auth').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                    initializeDashboard();
+                }, 1000);
+            } else {
+                showMessage('loginMessage', 'Invalid email or password!', 'error');
+            }
+        });
+
+        // Check if user is logged in
+        function checkAuth() {
+            const currentAdmin = localStorage.getItem('currentAdmin');
+            if (currentAdmin) {
+                document.getElementById('auth').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                initializeDashboard();
+            }
+        }
+
+        // Handle logout
+        function logout() {
+            localStorage.removeItem('currentAdmin');
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('auth').style.display = 'block';
+            document.getElementById('loginForm').reset();
+        }
+
+        // Initialize dashboard
+        function initializeDashboard() {
+            const currentAdmin = JSON.parse(localStorage.getItem('currentAdmin'));
+            // Update header with user info
+            const headerHtml = `
+                <h1>Book Review Admin Dashboard</h1>
+                <div class="user-info">
+                    <span>Welcome, ${currentAdmin.name}</span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+                <div id="currentTime"></div>
+            `;
+            document.querySelector('.header').innerHTML = headerHtml;
+            
+            // Initialize the rest of the dashboard
+            updateStats();
+            updateBooksList();
+            updateReviewsList();
+            updateBookSelect();
+        }
+
+        // Show message helper
+        function showMessage(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `message ${type}`;
+            setTimeout(() => {
+                element.textContent = '';
+                element.className = 'message';
+            }, 3000);
+        }
+
+        // Check authentication on page load
+        checkAuth();
+
+        // Include all the previous dashboard JavaScript code here
+        // ... (Previous dashboard JavaScript) ...
+         // Initialize local storage with sample data if empty
+         if (!localStorage.getItem('books')) {
+            localStorage.setItem('books', JSON.stringify([]));
+        }
+        if (!localStorage.getItem('reviews')) {
+            localStorage.setItem('reviews', JSON.stringify([]));
+        }
+
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('currentTime').textContent = now.toLocaleString();
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Update statistics
+        function updateStats() {
+            const books = JSON.parse(localStorage.getItem('books'));
+            const reviews = JSON.parse(localStorage.getItem('reviews'));
+            
+            document.getElementById('totalBooks').textContent = books.length;
+            document.getElementById('totalReviews').textContent = reviews.length;
+            
+            const averageRating = reviews.length > 0 
+                ? (reviews.reduce((sum, review) => sum + Number(review.rating), 0) / reviews.length).toFixed(1)
+                : '0.0';
+            document.getElementById('averageRating').textContent = averageRating;
+        }
+
+        // Handle adding new book
+        document.getElementById('addBookForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const book = {
+                id: Date.now(),
+                title: document.getElementById('bookTitle').value,
+                author: document.getElementById('bookAuthor').value,
+                genre: document.getElementById('bookGenre').value,
+                description: document.getElementById('bookDescription').value
+            };
+
+            const books = JSON.parse(localStorage.getItem('books'));
+            books.push(book);
+            localStorage.setItem('books', JSON.stringify(books));
+
+            showMessage('bookMessage', 'Book added successfully!', 'success');
+            this.reset();
+            updateBooksList();
+            updateBookSelect();
+            updateStats();
+        });
+        // Handle adding new review
+        document.getElementById('addReviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const review = {
+                id: Date.now(),
+                bookId: document.getElementById('reviewBook').value,
+                reviewerName: document.getElementById('reviewerName').value,
+                rating: document.getElementById('rating').value,
+                reviewText: document.getElementById('reviewText').value
+            };
+
+            const reviews = JSON.parse(localStorage.getItem('reviews'));
+            reviews.push(review);
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+
+            showMessage('reviewMessage', 'Review added successfully!', 'success');
+            this.reset();
+            updateReviewsList();
+            updateStats();
+        });
+
+ // Update books list
+ function updateBooksList() {
+            const books = JSON.parse(localStorage.getItem('books'));
+            const tbody = document.querySelector('#booksTable tbody');
+            tbody.innerHTML = '';
+
+            books.forEach(book => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${book.title}</td>
+                    <td>${book.author}</td>
+                    <td>${book.genre}</td>
+                    <td>
+                        <button class="action-btn delete-btn" onclick="deleteBook(${book.id})">Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Update reviews list
+        function updateReviewsList() {
+            const reviews = JSON.parse(localStorage.getItem('reviews'));
+            const books = JSON.parse(localStorage.getItem('books'));
+            const tbody = document.querySelector('#reviewsTable tbody');
+            tbody.innerHTML = '';
+
+            reviews.forEach(review => {
+                const book = books.find(b => b.id == review.bookId);
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${book ? book.title : 'Unknown Book'}</td>
+                    <td>${review.reviewerName}</td>
+                    <td>${review.rating}/5</td>
+                    <td>${review.reviewText}</td>
+                    <td>
+                        <button class="action-btn delete-btn" onclick="deleteReview(${review.id})">Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Update book select dropdown
+        function updateBookSelect() {
+            const books = JSON.parse(localStorage.getItem('books'));
+            const select = document.getElementById('reviewBook');
+            select.innerHTML = '<option value="">Select Book</option>';
+            
+            books.forEach(book => {
+                const option = document.createElement('option');
+                option.value = book.id;
+                option.textContent = book.title;
+                select.appendChild(option);
+            });
+        }
+       // Delete book
+       function deleteBook(id) {
+            const books = JSON.parse(localStorage.getItem('books'));
+            const reviews = JSON.parse(localStorage.getItem('reviews'));
+            
+            // Remove book
+            const updatedBooks = books.filter(book => book.id != id);
+            localStorage.setItem('books', JSON.stringify(updatedBooks));
+            
+            // Remove associated reviews
+            const updatedReviews = reviews.filter(review => review.bookId != id);
+            localStorage.setItem('reviews', JSON.stringify(updatedReviews));
+
+            updateBooksList();
+            updateReviewsList();
+            updateBookSelect();
+            updateStats();
+        }
+
+        // Delete review
+        function deleteReview(id) {
+            const reviews = JSON.parse(localStorage.getItem('reviews'));
+            const updatedReviews = reviews.filter(review => review.id != id);
+            localStorage.setItem('reviews', JSON.stringify(updatedReviews));
+
+            updateReviewsList();
+            updateStats();
+        }
+
+        // Show message
+        function showMessage(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `message ${type}`;
+            setTimeout(() => {
+                element.textContent = '';
+                element.className = 'message';
+            }, 3000);
+        }
+
+        // Initialize the dashboard
+        updateBooksList();
+        updateReviewsList();
+        updateBookSelect();
+        updateStats();
+
+    </script>
+</body>
+</html>

@@ -98,7 +98,7 @@ body{
 } */
 
 
-#home,#genres,#about,#signin,#addReview{
+#home,#genres,#about,#signin,#addReview,#admin{
     font-size:large;
     text-decoration: none;
     color: black;
