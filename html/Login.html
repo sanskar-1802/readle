@@ -3,221 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up & Login</title>
+    <title>Login & Signup</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            background-color: ;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #84cbfa, #f48fcd);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-        }
+.container {
+    width: 400px;
+    height: 500px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
 
-        .tabs {
-            display: flex;
-            margin-bottom: 2rem;
-        }
+.form-box {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    position: relative;
+}
 
-        .tab {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            color: #666;
-        }
+.button-box {
+    width: 240px;
+    margin: 30px auto;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 30px;
+    background: linear-gradient(to right, #75f6ff, #7e84ff);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
 
-        .tab.active {
-            color: #1877f2;
-            border-bottom: 2px solid #1877f2;
-        }
+.toggle-btn {
+    padding: 10px 30px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+}
 
-        .form-group {
-            margin-bottom: 1rem;
-        }
+#btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 100%;
+    background-color: white;
+    border-radius: 30px;
+    transition: 0.3s;
+}
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #444;
-        }
+.social-icons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
 
-        input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
+.social-icons img {
+    width: 40px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-        button {
-            width: 100%;
-            padding: 0.8rem;
-            background: #1877f2;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 1rem;
-        }
+.social-icons img:hover {
+    transform: scale(1.2);
+}
 
-        button:hover {
-            background: #166fe5;
-        }
+.input-group {
+    position: absolute;
+    width: 280px;
+    transition: 0.5s;
+}
 
-        .message {
-            margin-top: 1rem;
-            padding: 0.8rem;
-            border-radius: 5px;
-            text-align: center;
-        }
+.input-field {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 30px;
+    background-color: #f5f5f5;
+    font-size: 14px;
+    box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+}
 
-        .success {
-            background: #d4edda;
-            color: #155724;
-        }
+.input-field:focus {
+    background-color: #e7f0fd;
+    box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
 
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-        }
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to right, #75f6ff, #7e84ff);
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
 
-        .form {
-            display: none;
-        }
+.submit-btn:hover {
+    background: linear-gradient(to right,#75f6ff , #7e84ff);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
 
-        .form.active {
-            display: block;
-        }
+.check-box {
+    margin: 10px 0;
+}
+
+#login {
+    left: 50px;
+}
+
+#signup {
+    left: 450px;
+}
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="tabs">
-            <button class="tab active" onclick="showForm('login')">Login</button>
-            <button class="tab" onclick="showForm('signup')">Sign Up</button>
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">Login</button>
+                <button type="button" class="toggle-btn" onclick="signup()">Sign Up</button>
+            </div>
+            <!-- <div class="social-icons">
+                <img src="https://img.icons8.com/fluent/48/000000/facebook-new.png"/>
+                <img src="https://img.icons8.com/fluent/48/000000/twitter.png"/>
+                <img src="https://img.icons8.com/fluent/48/000000/google-plus.png"/>
+            </div> -->
+            <form id="login" class="input-group">
+                <input type="text" class="input-field" placeholder="Username" required>
+                <input type="password" class="input-field" placeholder="Password" required>
+                <input type="checkbox" class="check-box"><span>Remember me</span>
+                <button type="submit" class="submit-btn">Log In</button>
+            </form>
+            <form id="signup" class="input-group">
+                <input type="text" class="input-field" placeholder="Username" required>
+                <input type="email" class="input-field" placeholder="Email" required>
+                <input type="password" class="input-field" placeholder="Password" required>
+                <input type="checkbox" class="check-box"><span>I agree to the terms & conditions</span>
+                <button type="submit" class="submit-btn">Sign Up</button>
+            </form>
         </div>
-
-        <form id="loginForm" class="form active">
-            <div class="form-group">
-                <label for="loginEmail">Email</label>
-                <input type="email" id="loginEmail" required>
-            </div>
-            <div class="form-group">
-                <label for="loginPassword">Password</label>
-                <input type="password" id="loginPassword" required>
-            </div>
-            <button type="submit">Login</button>
-            <div id="loginMessage" class="message"></div>
-        </form>
-
-        <form id="signupForm" class="form">
-            <div class="form-group">
-                <label for="signupName">Full Name</label>
-                <input type="text" id="signupName" required>
-            </div>
-            <div class="form-group">
-                <label for="signupEmail">Email</label>
-                <input type="email" id="signupEmail" required>
-            </div>
-            <div class="form-group">
-                <label for="signupPassword">Password</label>
-                <input type="password" id="signupPassword" required>
-            </div>
-            <button type="submit">Sign Up</button>
-            <div id="signupMessage" class="message"></div>
-        </form>
     </div>
-
     <script>
-        function showForm(formType) {
-            const tabs = document.querySelectorAll('.tab');
-            const forms = document.querySelectorAll('.form');
-            
-            tabs.forEach(tab => tab.classList.remove('active'));
-            forms.forEach(form => form.classList.remove('active'));
-            
-            if (formType === 'login') {
-                tabs[0].classList.add('active');
-                forms[0].classList.add('active');
-            } else {
-                tabs[1].classList.add('active');
-                forms[1].classList.add('active');
-            }
-        }
+        var loginForm = document.getElementById("login");
+var signupForm = document.getElementById("signup");
+var btn = document.getElementById("btn");
 
-        // Handle Sign Up
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('signupName').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-            
-            // Get existing users or initialize empty array
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            
-            // Check if user already exists
-            if (users.some(user => user.email === email)) {
-                showMessage('signupMessage', 'Email already registered!', 'error');
-                return;
-            }
-            
-            // Add new user
-            users.push({ name, email, password });
-            localStorage.setItem('users', JSON.stringify(users));
-            
-            showMessage('signupMessage', 'Registration successful! Please login.', 'success');
-            this.reset();
-        });
+function signup() {
+    loginForm.style.left = "-400px";
+    signupForm.style.left = "50px";
+    btn.style.left = "120px";
+}
 
-        // Handle Login
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            // Get users from localStorage
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            
-            // Find user
-            const user = users.find(user => user.email === email && user.password === password);
-            
-            if (user) {
-                showMessage('loginMessage', 'Login successful!', 'success');
-                // Store logged in user
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                this.reset();
-            } else {
-                showMessage('loginMessage', 'Invalid email or password!', 'error');
-            }
-        });
+function login() {
+    loginForm.style.left = "50px";
+    signupForm.style.left = "450px";
+    btn.style.left = "0px";
+}
 
-        function showMessage(elementId, message, type) {
-            const element = document.getElementById(elementId);
-            element.textContent = message;
-            element.className = 'message ' + type;
-        }
+// Add event listeners for form submission
+loginForm.addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent actual form submission for demo purposes
+    alert("Login successful!");
+});
+
+signupForm.addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent actual form submission for demo purposes
+    alert("Sign up successful!");
+});
     </script>
 </body>
 </html>

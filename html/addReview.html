@@ -6,223 +6,288 @@
     <title>Reviews</title>
     <style>
          /* Modern CSS Reset */
-         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
 
-        /* Variables */
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --background-color: #f5f6fa;
-            --card-background: #ffffff;
-            --text-color: #2c3e50;
-            --border-radius: 10px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
+/* Custom Properties */
+:root {
+    --primary-color: #D2B48C;
+    --primary-hover: #D2B48C;
+    --secondary-color: #64748b;
+    --success-color: #22c55e;
+    --danger-color: #ef4444;
+    --background-color: #f8fafc;
+    --card-background: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-        /* Body Styles */
-        body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+body {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: 2rem;
+    min-height: 100vh;
+}
 
-        /* Header Styles */
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            font-size: 2.5em;
-            margin: 20px 0;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--secondary-color);
-        }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-        h2 {
-            color: var(--primary-color);
-            margin: 25px 0 15px 0;
-            font-size: 1.8em;
-        }
+/* Typography */
+h1 {
+    color: var(--text-primary);
+    font-size: 2.75rem;
+    font-weight: 800;
+    text-align: center;
+    margin: 2rem 0;
+    background: linear-gradient(to right, var(--primary-color), #000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.025em;
+}
 
-        /* Form Styles */
-        #addReview {
-            background-color: var(--card-background);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-        }
+h2 {
+    color: var(--text-primary);
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin: 1.5rem 0;
+    letter-spacing: -0.025em;
+}
 
-        form {
-            display: grid;
-            gap: 15px;
-        }
+/* Form Styles */
+#addReview {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
+    border: 1px solid rgb(226 232 240);
+}
 
-        input, textarea, select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: var(--border-radius);
-            font-size: 1em;
-            transition: var(--transition);
-        }
+form {
+    display: grid;
+    gap: 1.25rem;
+}
 
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
+input, 
+textarea, 
+select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgb(226 232 240);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: var(--transition);
+    color: var(--text-primary);
+    background-color: #ffffff;
+}
 
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
+input:hover,
+textarea:hover,
+select:hover {
+    border-color: rgb(148 163 184);
+}
 
-        button[type="submit"] {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            transition: var(--transition);
-        }
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
 
-        button[type="submit"]:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
 
-        /* Search Section Styles */
-        #searchSection {
-            margin: 30px 0;
-        }
+button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+}
 
-        #searchInput {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: var(--border-radius);
-            font-size: 1.1em;
-            background-color: var(--card-background);
-            transition: var(--transition);
-        }
+button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
 
-        #searchInput:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
+button:active {
+    transform: translateY(0);
+}
 
-        /* Book List Styles */
-        #bookList {
-            display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        }
+/* Search Section */
+#searchSection {
+    margin: 2rem 0;
+}
 
-        .book-card {
-            background-color: var(--card-background);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
+#searchInput {
+    background-color: white;
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1.125rem;
+    box-shadow: var(--box-shadow);
+}
 
-        .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
+/* Book List */
+#bookList {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
 
-        .book-card h3 {
-            color: var(--primary-color);
-            font-size: 1.4em;
-            margin-bottom: 10px;
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 8px;
-        }
+.book-card {
+    background-color: var(--card-background);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    border: 1px solid rgb(226 232 240);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
-        .book-card p {
-            margin: 10px 0;
-        }
+.book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
 
-        .book-card strong {
-            color: var(--primary-color);
-        }
+.book-card h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
 
-        .delete-btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 10px;
-        }
+.book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
 
-        .delete-btn:hover {
-            background-color: #c0392b;
-        }
+.author {
+    color: var(--text-secondary);
+    font-size: 0.925rem;
+}
 
-        /* Star Rating Styles */
-        .rating {
-            color: #f1c40f;
-            font-size: 1.2em;
-        }
+.review-text {
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0.75rem 0;
+}
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
+/* Rating Stars */
+.rating {
+    color: #fbbf24;
+    font-size: 1.25rem;
+    display: flex;
+    gap: 0.25rem;
+}
 
-            #bookList {
-                grid-template-columns: 1fr;
-            }
+.delete-btn {
+    background-color: var(--danger-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    align-self: flex-start;
+    margin-top: auto;
+}
 
-            h1 {
-                font-size: 2em;
-            }
+.delete-btn:hover {
+    background-color: #dc2626;
+}
 
-            .book-card {
-                margin: 10px 0;
-            }
-        }
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.book-card {
+    animation: fadeIn 0.4s ease-out;
+}
 
-        .book-card {
-            animation: fadeIn 0.5s ease-out;
-        }
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    #bookList {
+        grid-template-columns: 1fr;
+    }
+
+    .book-card {
+        margin: 0.5rem 0;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: rgb(56,59,38);
+        --card-background: #F5F5DC;
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+    }
+
+    input, 
+    textarea, 
+    select {
+        /* background-color: #; */
+        border-color: #334155;
+        color: #f1f5f9;
+    }
+
+    input:hover,
+    textarea:hover,
+    select:hover {
+        border-color: #475569;
+    }
+
+    .book-card {
+        border-color: #334155;
+    }
+}
     </style>
 </head>
 <body>
     <h1>Add Reviews</h1>
     
     <div id="addReview">
-        <h2>Add New Review</h2>
+        <h2 style="color: rgb(101,76,55);">Add New Review</h2>
         <form id="reviewForm">
             <input type="text" id="title" placeholder="Book Title" required><br>
             <input type="text" id="author" placeholder="Author" required><br>
@@ -246,6 +311,6 @@
 
     <div id="bookList"></div>
     <script src="addReview.js"></script>
-    <script src="main.js"></script>
+    <!-- <script src="main.js"></script> -->
 </body>
 </html>
