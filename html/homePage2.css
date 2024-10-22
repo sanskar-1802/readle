@@ -1,0 +1,326 @@
+/* Modern CSS Reset and Variables */
+:root {
+    --primary: #2C3E50;
+    --secondary: #E74C3C;
+    --accent: #ECF0F1;
+    --text: #2C3E50;
+    --background: #F9F9F9;
+    --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Enhanced Navbar */
+.navbar {
+    background: var(--primary);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar h1 {
+    color: var(--accent);
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, var(--accent), #FFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.tags {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.tags a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.7rem 1.2rem;
+    border-radius: 30px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.tags a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--secondary);
+    transition: var(--transition);
+}
+
+.tags a:hover {
+    color: var(--secondary);
+    transform: translateY(-2px);
+}
+
+.tags a:hover::before {
+    width: 80%;
+}
+
+/* Main Content with Enhanced Cards */
+main {
+    max-width: 1400px;
+    margin: 3rem auto;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.mustreads, .genres {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.mustreads::before, .genres::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+}
+
+.mustreads:hover, .genres:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.mustreads a, .genres a {
+    text-decoration: none;
+    color: var(--text);
+}
+
+.mustreads h1, .genres h1 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin: 1rem 0;
+    font-weight: bold;
+}
+
+.mustreads h2, .genres h2 {
+    font-size: 1.8rem;
+    color: var(--secondary);
+}
+
+.mustreads h3, .genres h3 {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.img1, .img2 {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 20px;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.img1:hover, .img2:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Enhanced Footer */
+.footer {
+    background: var(--primary);
+    color: var(--accent);
+    padding: 4rem 5% 1rem;
+    position: relative;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-section h3 {
+    color: var(--secondary);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50%;
+    height: 2px;
+    background: var(--secondary);
+}
+
+.footer-section p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links a {
+    color: var(--accent);
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 0;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--secondary);
+    padding-left: 10px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.social-icons a {
+    color: var(--accent);
+    font-size: 1.8rem;
+    transition: var(--transition);
+}
+
+.social-icons a:hover {
+    color: var(--secondary);
+    transform: translateY(-5px);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Responsive Design Improvements */
+@media screen and (max-width: 1024px) {
+    .navbar {
+        padding: 1rem 3%;
+    }
+    
+    main {
+        padding: 0 3%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .navbar h1 {
+        margin-bottom: 1rem;
+    }
+    
+    .tags {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .tags a {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem;
+        border-radius: 5px;
+    }
+    
+    main {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .mustreads, .genres {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar h1 {
+        font-size: 2rem;
+    }
+    
+    .mustreads h1, .genres h1 {
+        font-size: 2rem;
+    }
+    
+    .mustreads h2, .genres h2 {
+        font-size: 1.5rem;
+    }
+    
+    .footer-section h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Animations */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px rgba(255,255,255,0.8);
+    }
+    to {
+        text-shadow: 0 0 10px rgba(255,255,255,0.8),
+                     0 0 20px rgba(255,255,255,0.5);
+    }
+}
+
+.mustreads, .genres {
+    animation: slideUp 0.8s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
