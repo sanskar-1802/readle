@@ -300,8 +300,7 @@
 
     <!-- Dashboard Section -->
     <div id="dashboard">
-        <!-- Include the entire dashboard HTML from the previous version here -->
-        <!-- ... (Previous dashboard HTML) ... -->
+      
         <div class="container">
             <header class="header">
                 <h1>Book Review Admin Dashboard</h1>
@@ -419,9 +418,9 @@
 
     <script>
         // Authentication Scripts
-        const ADMIN_SECRET = "admin123"; // In a real app, this would be server-side
+        const ADMIN_SECRET = "admin123"; 
 
-        // Initialize admin users in localStorage if not exists
+
         if (!localStorage.getItem('adminUsers')) {
             localStorage.setItem('adminUsers', JSON.stringify([]));
         }
